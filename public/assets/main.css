@@ -1,0 +1,32 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#container {
+	margin: 0 auto;
+	text-align: center;
+	width: 50%;
+}
+
+#messages {
+	height: 500px;
+	overflow-y: scroll;
+	width: 50%;
+	margin: 0 auto;
+}
+
+#data {
+	position: absolute;
+	left: 50%;
+	top: 90px;
+}
+
+#innerData {
+	text-align: center;
+	position: relative;
+	left: -50%;
+	border: black 1px solid;
+	background-color: white;
+	padding: 10px;
+}

@@ -1,6 +1,7 @@
 var socket = io();
 
 $(document).ready(function() {
+	var user = "stranger";
 	var url = window.location.pathname;
 	var urlsplit = url.split("/");
 	var room = {
@@ -13,9 +14,14 @@ $(document).ready(function() {
 
 	socket.emit("findRoom", room);
 
+	$("#nameSub").click(function() {
+		user = $('#name').val();
+		$("#data").hide();
+	});
+
 	$("#submit").click(function() {
 		room.data = {
-			name: "Robbie",
+			name: user,
 			msg: $('#inp').val()
 		}
 
@@ -24,16 +30,16 @@ $(document).ready(function() {
 	});
 
 	socket.on('message', function(data) {
-		$("body").append("<p>" + data.name + ": " + data.msg + "</p>");
+		$("#messages").append("<p>" + data.name + ": " + data.msg + "</p>");
 	});
 
 	socket.on('disc', function(data) {
-		$("body").append("<p>" + data.msg + "</p>");
+		$("#messages").append("<p>" + data.msg + "</p>");
 	});
 
 	$(window).bind("beforeunload", function() { 
 		room.data = {
-			name: "Robbie",
+			name: user,
 			msg: "User has Disconnected"
 		}
 	    socket.emit('messageDisc', room);
